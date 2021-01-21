@@ -8,3 +8,13 @@ D:\RFID_LIB_GIT\dropbox\DropBoxUI\DropBoxUI\obj\Debug\DropBoxUI.csproj.GenerateR
 D:\RFID_LIB_GIT\dropbox\DropBoxUI\DropBoxUI\obj\Debug\DropBoxUI.csproj.CoreCompileInputs.cache
 D:\RFID_LIB_GIT\dropbox\DropBoxUI\DropBoxUI\obj\Debug\DropBoxUI.exe
 D:\RFID_LIB_GIT\dropbox\DropBoxUI\DropBoxUI\obj\Debug\DropBoxUI.pdb
+D:\RFID_LIB_GIT\arduinoStepperMotor\dropbox\DropBoxUI\DropBoxUI\bin\Debug\DropBoxUI.exe.config
+D:\RFID_LIB_GIT\arduinoStepperMotor\dropbox\DropBoxUI\DropBoxUI\bin\Debug\DropBoxUI.exe
+D:\RFID_LIB_GIT\arduinoStepperMotor\dropbox\DropBoxUI\DropBoxUI\bin\Debug\DropBoxUI.pdb
+D:\RFID_LIB_GIT\arduinoStepperMotor\dropbox\DropBoxUI\DropBoxUI\obj\Debug\DropBoxUI.csprojAssemblyReference.cache
+D:\RFID_LIB_GIT\arduinoStepperMotor\dropbox\DropBoxUI\DropBoxUI\obj\Debug\DropBoxUI.Properties.Resources.resources
+D:\RFID_LIB_GIT\arduinoStepperMotor\dropbox\DropBoxUI\DropBoxUI\obj\Debug\DropBoxUI.SetUpForm.resources
+D:\RFID_LIB_GIT\arduinoStepperMotor\dropbox\DropBoxUI\DropBoxUI\obj\Debug\DropBoxUI.csproj.GenerateResource.cache
+D:\RFID_LIB_GIT\arduinoStepperMotor\dropbox\DropBoxUI\DropBoxUI\obj\Debug\DropBoxUI.csproj.CoreCompileInputs.cache
+D:\RFID_LIB_GIT\arduinoStepperMotor\dropbox\DropBoxUI\DropBoxUI\obj\Debug\DropBoxUI.exe
+D:\RFID_LIB_GIT\arduinoStepperMotor\dropbox\DropBoxUI\DropBoxUI\obj\Debug\DropBoxUI.pdb

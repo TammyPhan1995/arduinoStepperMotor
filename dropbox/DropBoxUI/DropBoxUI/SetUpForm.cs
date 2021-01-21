@@ -33,24 +33,23 @@ namespace DropBoxUI
         {
             cbBackDoorPort.DropDownStyle = ComboBoxStyle.DropDownList;
             cbFrontDoorPort.DropDownStyle = ComboBoxStyle.DropDownList;
-            cbScannerPort.DropDownStyle = ComboBoxStyle.DropDownList;
             gbFD.Enabled = false;
             gbBD.Enabled = false;
         }
 
         private void btnGetAllPort_Click(object sender, EventArgs e)
         {
+            cbBackDoorPort.Items.Clear();
+            cbFrontDoorPort.Items.Clear();
             ports = SerialPort.GetPortNames();
             foreach (string port in ports)
             {
                 cbBackDoorPort.Items.Add(port);
                 cbFrontDoorPort.Items.Add(port);
-                cbScannerPort.Items.Add(port);
                 if (ports[0] != null)
                 {
                     cbBackDoorPort.SelectedItem = ports[0];
                     cbFrontDoorPort.SelectedItem = ports[0];
-                    cbScannerPort.SelectedItem = ports[0];
                 }
             }
 

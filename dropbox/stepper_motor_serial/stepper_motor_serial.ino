@@ -1,25 +1,15 @@
 #include <Stepper.h>      //Stepper motor lib
 #include <SPI.h>          //serial lib
 
-const int stepsPerMotorRevolution = 32; //No of steps per internal revolution of motor,
-//4-step mode as used in Arduino Stepper library
-
-const int stepsPerOutputRevolution = 32*64; //no of steps per revolution of the output shaft
-
-const int motorpin1 = 8; //Assign motor (ie board) pins to Arduino pins
-const int motorpin2 = 9; //
-const int motorpin3 = 10; //
-const int motorpin4 = 11; //
-
-// initialize the stepper library on pins 8 through 11, Motor rev steps, "Firing" sequence 1-3-2-4,
-Stepper myStepper(stepsPerMotorRevolution, motorpin1,motorpin3,motorpin2,motorpin4);
+const int stepsPerRevolution = 2048;
+Stepper myStepper = Stepper(stepsPerRevolution, 8, 10, 9, 11);
 
 String inputString = "";         // a string to hold incoming data
 boolean stringComplete = false;  // whether the string is complete
 String commandString = "";
 
 void setup() {
-  myStepper.setSpeed(200); //Set the speed
+  myStepper.setSpeed(15);
   Serial.begin(9600);
 }
 
@@ -29,14 +19,12 @@ void loop() {
     stringComplete = false;
     if (commandString.equals("FDOP"))
     {
-      myStepper.step(stepsPerOutputRevolution);
-      delay(500);
+      myStepper.step(stepsPerRevolution);
       Serial.println(F("OPENED"));
     }
       if (commandString.equals("FDCL"))
     {
-      myStepper.step(-stepsPerOutputRevolution);
-      delay(500);
+      myStepper.step(-stepsPerRevolution);
       Serial.println(F("CLOSED"));
     }
 
