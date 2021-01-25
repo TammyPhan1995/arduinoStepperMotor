@@ -6,7 +6,7 @@ using System.Drawing;
 using System.IO.Ports;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading.Tasks; 
 using System.Windows.Forms;
 
 namespace DropBoxUI
@@ -18,9 +18,10 @@ namespace DropBoxUI
         private const string ACK_MSG = "ACK";
 
         private bool isFDConnecting = false;
-        private bool isBDConnection = false;
-        private bool isScannerConnection = false;
         string[] ports;
+
+        private string portFD;
+        private string portBD;
 
         private string FDmsg = "";
 
@@ -33,8 +34,6 @@ namespace DropBoxUI
         {
             cbBackDoorPort.DropDownStyle = ComboBoxStyle.DropDownList;
             cbFrontDoorPort.DropDownStyle = ComboBoxStyle.DropDownList;
-            gbFD.Enabled = false;
-            gbBD.Enabled = false;
         }
 
         private void btnGetAllPort_Click(object sender, EventArgs e)
@@ -68,34 +67,6 @@ namespace DropBoxUI
             }
         }
 
-        private void AppendTextPlus(RichTextBox txtBox, string text, Color color)
-        {
-            try
-            {
-                txtBox.SelectionStart = txtBox.TextLength;
-                txtBox.SelectionLength = 0;
-
-                txtBox.SelectionColor = color;
-                txtBox.AppendText(text);
-                txtBox.SelectionColor = txtBox.ForeColor;
-                txtBox.ScrollToCaret();
-
-            }
-            catch (Exception)
-            {
-
-            }
-        }
-
-        private void AppendTextPlus(RichTextBox txtBox, string text)
-        {
-            txtBox.SelectionStart = txtBox.TextLength;
-            txtBox.SelectionLength = 0;
-
-            txtBox.AppendText(text);
-            txtBox.SelectionColor = txtBox.ForeColor;
-            txtBox.ScrollToCaret();
-        }
 
         private void connectToFB()
         {
@@ -115,15 +86,10 @@ namespace DropBoxUI
             }
             catch (Exception e)
             {
-                AppendTextPlus(txtLog, GetCurrentTime() + e.Message + "\n", Color.Red);
             }
             if (isFDConnecting)
             {
-                btFDConnect.Text = "Disconnect";
-                gbFD.Enabled = true;
-                cbFrontDoorPort.Enabled = false;
-                AppendTextPlus(txtLog, GetCurrentTime() + "Connected to Front Door\n");
-                txtLog.ScrollToCaret();
+               
             }
         }
 
@@ -136,18 +102,10 @@ namespace DropBoxUI
             }
             catch (Exception e)
             {
-                AppendTextPlus(txtLog, GetCurrentTime() + e.Message + "\n", Color.Red);
+                
             }
-            btFDConnect.Text = "Connect";
-            gbFD.Enabled = false;
-            cbFrontDoorPort.Enabled = true;
-            AppendTextPlus(txtLog, GetCurrentTime() + "Disconnected from Front Door\n", Color.Red);
         }
 
-        private String GetCurrentTime()
-        {
-            return DateTime.Parse(DateTime.Now.ToString()).ToString("HH:mm:ss") + ": ";
-        }
 
         private void btFBUp_Click(object sender, EventArgs e)
         {
@@ -172,16 +130,30 @@ namespace DropBoxUI
             Console.WriteLine(this.FDmsg);
             if (this.FDmsg.Contains(ACK_MSG))
             {
-               // AppendTextPlus(txtLog, GetCurrentTime() + "Front Door Acknowledged\n");
             }
             else if(this.FDmsg.Contains(CLOSED_DOOR_MSG))
             {
-               // AppendTextPlus(txtLog, GetCurrentTime() + "Front Door Closed\n");
             }
             else if (this.FDmsg.Contains(OPENED_DOOR_MSG))
             {
-               // AppendTextPlus(txtLog, GetCurrentTime() + "Front Door Opened\n");
             }
+
+        }
+
+        private void btAccess_Click(object sender, EventArgs e)
+        {
+            ReturnForm returnForm = new ReturnForm(portFD, portBD);
+            returnForm.ShowDialog();
+        }
+
+        private void btGetPortFrontDoor_Click(object sender, EventArgs e)
+        {
+            portFD = cbFrontDoorPort.GetItemText(cbFrontDoorPort.SelectedItem);
+        }
+
+        private void btnGetPortBD_Click(object sender, EventArgs e)
+        {
+            portBD = cbBackDoorPort.GetItemText(cbBackDoorPort.SelectedItem);
 
         }
     }
