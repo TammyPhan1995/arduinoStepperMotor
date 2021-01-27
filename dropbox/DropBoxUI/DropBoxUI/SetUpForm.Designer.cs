@@ -29,23 +29,24 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SetUpForm));
             this.serialFrontDoor = new System.IO.Ports.SerialPort(this.components);
             this.serialBackDoor = new System.IO.Ports.SerialPort(this.components);
             this.serialUHF = new System.IO.Ports.SerialPort(this.components);
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.cbBackDoorPort = new System.Windows.Forms.ComboBox();
+            this.btnGetPortBD = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
+            this.cbBackDoorPort = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.cbFrontDoorPort = new System.Windows.Forms.ComboBox();
+            this.btGetPortFrontDoor = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
+            this.cbFrontDoorPort = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.btnGetAllPort = new System.Windows.Forms.Button();
             this.pnRight = new System.Windows.Forms.Panel();
             this.btAccess = new System.Windows.Forms.Button();
-            this.btGetPortFrontDoor = new System.Windows.Forms.Button();
-            this.btnGetPortBD = new System.Windows.Forms.Button();
             this.panel3.SuspendLayout();
             this.panel1.SuspendLayout();
             this.pnRight.SuspendLayout();
@@ -67,22 +68,15 @@
             this.panel3.Size = new System.Drawing.Size(475, 100);
             this.panel3.TabIndex = 2;
             // 
-            // label2
+            // btnGetPortBD
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(25, 20);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(74, 17);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Back Door";
-            // 
-            // cbBackDoorPort
-            // 
-            this.cbBackDoorPort.FormattingEnabled = true;
-            this.cbBackDoorPort.Location = new System.Drawing.Point(67, 52);
-            this.cbBackDoorPort.Name = "cbBackDoorPort";
-            this.cbBackDoorPort.Size = new System.Drawing.Size(121, 24);
-            this.cbBackDoorPort.TabIndex = 1;
+            this.btnGetPortBD.Location = new System.Drawing.Point(218, 49);
+            this.btnGetPortBD.Name = "btnGetPortBD";
+            this.btnGetPortBD.Size = new System.Drawing.Size(91, 27);
+            this.btnGetPortBD.TabIndex = 4;
+            this.btnGetPortBD.Text = "Get Port";
+            this.btnGetPortBD.UseVisualStyleBackColor = true;
+            this.btnGetPortBD.Click += new System.EventHandler(this.btnGetPortBD_Click);
             // 
             // label5
             // 
@@ -92,6 +86,23 @@
             this.label5.Size = new System.Drawing.Size(38, 17);
             this.label5.TabIndex = 3;
             this.label5.Text = "Port:";
+            // 
+            // cbBackDoorPort
+            // 
+            this.cbBackDoorPort.FormattingEnabled = true;
+            this.cbBackDoorPort.Location = new System.Drawing.Point(67, 52);
+            this.cbBackDoorPort.Name = "cbBackDoorPort";
+            this.cbBackDoorPort.Size = new System.Drawing.Size(121, 24);
+            this.cbBackDoorPort.TabIndex = 1;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(25, 20);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(74, 17);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Back Door";
             // 
             // panel1
             // 
@@ -105,22 +116,15 @@
             this.panel1.Size = new System.Drawing.Size(475, 100);
             this.panel1.TabIndex = 0;
             // 
-            // label1
+            // btGetPortFrontDoor
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(22, 12);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(76, 17);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Front Door";
-            // 
-            // cbFrontDoorPort
-            // 
-            this.cbFrontDoorPort.FormattingEnabled = true;
-            this.cbFrontDoorPort.Location = new System.Drawing.Point(67, 47);
-            this.cbFrontDoorPort.Name = "cbFrontDoorPort";
-            this.cbFrontDoorPort.Size = new System.Drawing.Size(121, 24);
-            this.cbFrontDoorPort.TabIndex = 1;
+            this.btGetPortFrontDoor.Location = new System.Drawing.Point(218, 47);
+            this.btGetPortFrontDoor.Name = "btGetPortFrontDoor";
+            this.btGetPortFrontDoor.Size = new System.Drawing.Size(91, 26);
+            this.btGetPortFrontDoor.TabIndex = 3;
+            this.btGetPortFrontDoor.Text = "Get Port";
+            this.btGetPortFrontDoor.UseVisualStyleBackColor = true;
+            this.btGetPortFrontDoor.Click += new System.EventHandler(this.btGetPortFrontDoor_Click);
             // 
             // label4
             // 
@@ -130,6 +134,23 @@
             this.label4.Size = new System.Drawing.Size(38, 17);
             this.label4.TabIndex = 2;
             this.label4.Text = "Port:";
+            // 
+            // cbFrontDoorPort
+            // 
+            this.cbFrontDoorPort.FormattingEnabled = true;
+            this.cbFrontDoorPort.Location = new System.Drawing.Point(67, 47);
+            this.cbFrontDoorPort.Name = "cbFrontDoorPort";
+            this.cbFrontDoorPort.Size = new System.Drawing.Size(121, 24);
+            this.cbFrontDoorPort.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(22, 12);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(76, 17);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Front Door";
             // 
             // btnGetAllPort
             // 
@@ -163,34 +184,15 @@
             this.btAccess.UseVisualStyleBackColor = true;
             this.btAccess.Click += new System.EventHandler(this.btAccess_Click);
             // 
-            // btGetPortFrontDoor
-            // 
-            this.btGetPortFrontDoor.Location = new System.Drawing.Point(218, 47);
-            this.btGetPortFrontDoor.Name = "btGetPortFrontDoor";
-            this.btGetPortFrontDoor.Size = new System.Drawing.Size(91, 26);
-            this.btGetPortFrontDoor.TabIndex = 3;
-            this.btGetPortFrontDoor.Text = "Get Port";
-            this.btGetPortFrontDoor.UseVisualStyleBackColor = true;
-            this.btGetPortFrontDoor.Click += new System.EventHandler(this.btGetPortFrontDoor_Click);
-            // 
-            // btnGetPortBD
-            // 
-            this.btnGetPortBD.Location = new System.Drawing.Point(218, 49);
-            this.btnGetPortBD.Name = "btnGetPortBD";
-            this.btnGetPortBD.Size = new System.Drawing.Size(91, 27);
-            this.btnGetPortBD.TabIndex = 4;
-            this.btnGetPortBD.Text = "Get Port";
-            this.btnGetPortBD.UseVisualStyleBackColor = true;
-            this.btnGetPortBD.Click += new System.EventHandler(this.btnGetPortBD_Click);
-            // 
             // SetUpForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(481, 295);
             this.Controls.Add(this.pnRight);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SetUpForm";
-            this.Text = "Set Up Connection";
+            this.Text = "BOOK DROP SET UP CONNECTION";
             this.Load += new System.EventHandler(this.SetUpForm_Load);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();

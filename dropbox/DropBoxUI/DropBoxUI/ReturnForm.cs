@@ -20,9 +20,6 @@ namespace DropBoxUI
             InitializeComponent();
             this.portFD = portFD;
             this.portBD = portBD;
-            int x = (pbBottom.Width - btStart.Width) / 2;
-            pbBottom.Location = new Point(x, pbBottom.Location.Y);
-            lbWelcome.Location = new Point(x, lbWelcome.Location.Y);
-       }
+        }
     }
 }

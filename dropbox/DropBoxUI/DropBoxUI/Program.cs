@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DropBoxUI.Utils;
 
 namespace DropBoxUI
 {
@@ -16,6 +17,7 @@ namespace DropBoxUI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            //APIHelpers.initializeClient();
             Application.Run(new SetUpForm());
         }
     }
