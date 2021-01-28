@@ -17,12 +17,12 @@ namespace DropBoxUI.Utils
         public static readonly string RQ_BACK_CLOSE = "#BDCL\n";
 
         //response from front door
-        public static readonly string RP_FONT_OPENED = "FD_OPENED";
-        public static readonly string RP_FONT_CLOSED = "FD_CLOSED";
+        public static readonly string RP_FONT_OPENED = "OPENED";
+        public static readonly string RP_FONT_CLOSED = "CLOSED";
 
         //response from back door
-        public static readonly string RP_BACK_OPENED = "BD_OPENED";
-        public static readonly string RP_BACK_CLOSED = "BD_CLOSED";
+        public static readonly string RP_BACK_OPENED = "OPENED";
+        public static readonly string RP_BACK_CLOSED = "CLOSED";
 
 
 

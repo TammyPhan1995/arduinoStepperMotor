@@ -47,6 +47,8 @@
             this.btnGetAllPort = new System.Windows.Forms.Button();
             this.pnRight = new System.Windows.Forms.Panel();
             this.btAccess = new System.Windows.Forms.Button();
+            this.btClose = new System.Windows.Forms.Button();
+            this.btOpen = new System.Windows.Forms.Button();
             this.panel3.SuspendLayout();
             this.panel1.SuspendLayout();
             this.pnRight.SuspendLayout();
@@ -107,6 +109,8 @@
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.btOpen);
+            this.panel1.Controls.Add(this.btClose);
             this.panel1.Controls.Add(this.btGetPortFrontDoor);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.cbFrontDoorPort);
@@ -184,6 +188,26 @@
             this.btAccess.UseVisualStyleBackColor = true;
             this.btAccess.Click += new System.EventHandler(this.btAccess_Click);
             // 
+            // btClose
+            // 
+            this.btClose.Location = new System.Drawing.Point(378, 12);
+            this.btClose.Name = "btClose";
+            this.btClose.Size = new System.Drawing.Size(75, 23);
+            this.btClose.TabIndex = 4;
+            this.btClose.Text = "close";
+            this.btClose.UseVisualStyleBackColor = true;
+            this.btClose.Click += new System.EventHandler(this.btClose_Click);
+            // 
+            // btOpen
+            // 
+            this.btOpen.Location = new System.Drawing.Point(378, 49);
+            this.btOpen.Name = "btOpen";
+            this.btOpen.Size = new System.Drawing.Size(75, 23);
+            this.btOpen.TabIndex = 5;
+            this.btOpen.Text = "open";
+            this.btOpen.UseVisualStyleBackColor = true;
+            this.btOpen.Click += new System.EventHandler(this.btOpen_Click);
+            // 
             // SetUpForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -221,6 +245,8 @@
         private System.Windows.Forms.Button btAccess;
         private System.Windows.Forms.Button btnGetPortBD;
         private System.Windows.Forms.Button btGetPortFrontDoor;
+        private System.Windows.Forms.Button btOpen;
+        private System.Windows.Forms.Button btClose;
     }
 }
 

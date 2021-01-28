@@ -21,6 +21,10 @@ void loop() {
     {
       myStepper.step(stepsPerRevolution);
       Serial.println(F("OPENED"));
+      delay(5000);
+      myStepper.step(-stepsPerRevolution);
+      Serial.println(F("CLOSED"));
+
     }
       if (commandString.equals("FDCL"))
     {

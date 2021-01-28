@@ -24,3 +24,7 @@ D:\RFID_LIB_GIT\arduinoStepperMotor\dropbox\DropBoxUI\DropBoxUI\bin\Debug\System
 D:\RFID_LIB_GIT\arduinoStepperMotor\dropbox\DropBoxUI\DropBoxUI\bin\Debug\Newtonsoft.Json.xml
 D:\RFID_LIB_GIT\arduinoStepperMotor\dropbox\DropBoxUI\DropBoxUI\bin\Debug\System.Net.Http.Formatting.xml
 D:\RFID_LIB_GIT\arduinoStepperMotor\dropbox\DropBoxUI\DropBoxUI\obj\Debug\DropBoxUI.csproj.CopyComplete
+D:\RFID_LIB_GIT\arduinoStepperMotor\dropbox\DropBoxUI\DropBoxUI\obj\Debug\DropBoxUI.BookReturnItem.resources
+D:\RFID_LIB_GIT\arduinoStepperMotor\dropbox\DropBoxUI\DropBoxUI\obj\Debug\DropBoxUI.BookScannedItem.resources
+D:\RFID_LIB_GIT\arduinoStepperMotor\dropbox\DropBoxUI\DropBoxUI\obj\Debug\DropBoxUI.ModalOK.resources
+D:\RFID_LIB_GIT\arduinoStepperMotor\dropbox\DropBoxUI\DropBoxUI\obj\Debug\DropBoxUI.ModalYESNO.resources
