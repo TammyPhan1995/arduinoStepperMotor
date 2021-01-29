@@ -12,7 +12,7 @@ namespace DropBoxUI.Processors
     {
         public async static Task<ReturnResponseModel> returnBook(String bookRfid)
         {
-            return await BookAPI.returnBook(bookRfid);
+            return await BookAPI.returnBook(new ReturnRequestModel(bookRfid));
 
         }
     }

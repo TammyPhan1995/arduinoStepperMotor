@@ -42,12 +42,12 @@ namespace DropBoxUI.APIs
         }
 
 
-        public static async Task<ReturnResponseModel> returnBook(String bookRfid)
+        public static async Task<ReturnResponseModel> returnBook(ReturnRequestModel requestBody)
         {
             string url = $"/BookBorrowing/returnOne";
             try
             {
-                using (HttpResponseMessage response = await APIHelpers.ApiClient.PostAsJsonAsync(url, bookRfid))
+                using (HttpResponseMessage response = await APIHelpers.ApiClient.PostAsJsonAsync(url, requestBody))
                 {
                     if (response.IsSuccessStatusCode)
                     {

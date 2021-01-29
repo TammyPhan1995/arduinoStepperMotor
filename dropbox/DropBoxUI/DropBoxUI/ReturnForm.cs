@@ -77,9 +77,8 @@ namespace DropBoxUI
         {
             //connectToSerialPortBackDoor(portBack);
             connectToSerialPortFrontDoor(portFont);
-            resetState();
             bookCodeMap = new Dictionary<String, String>();
-
+            resetState();
         }
 
 
@@ -169,6 +168,8 @@ namespace DropBoxUI
             txtMessage.Text = "Please click on start button to begin";
             lbsession.Hide();
             processStatus = ProcessStatus.RESET;
+            lbNumber.Text = "Numnber book scanned: " + numberOfBookScanned;
+            bookCodeMap.Clear();
 
         }
 
@@ -189,14 +190,14 @@ namespace DropBoxUI
                     txtMessage.Text = "Returned item";
                     //openBackDoor();
                 }
-                else if (rs.book.status.Contains(BookStatus.INVALID.ToString()))
+                else if (rs.book.status.Contains(BookStatus.OVERDUE.ToString()))
                 {
                     processStatus = ProcessStatus.ERROR;
                     txtMessage.Text = "Return failed. Please take you book out and return at libarian counter as overdue. " +
                         "The door wil close in few second.";
                     openFrontDoor();
                 }
-                else if (rs.book.status.Contains(BookStatus.OVERDUE.ToString()))
+                else if (rs.book.status.Contains(BookStatus.INVALID.ToString()))
                 {
                     processStatus = ProcessStatus.ERROR;
                     txtMessage.Text = "Return failed. This book hasn't borrowed yet. Please take it out and contact the libarian " +
@@ -210,7 +211,7 @@ namespace DropBoxUI
             else
             {
                 processStatus = ProcessStatus.ERROR;
-                txtMessage.Text = "Return failed. Please take the item out and contact the libarian" +
+                txtMessage.Text = "Return failed. Please take the item out and contact the libarian. " +
                        "The door wil close in few second.";
                 openFrontDoor();
             }
@@ -328,7 +329,6 @@ namespace DropBoxUI
             timerWaitCloseDoor.Enabled = false;
             if (processStatus == ProcessStatus.START)
             {
-                Console.WriteLine("start scanning");
                 enableScanner();
                 timerCountBook.Enabled = true;
             }

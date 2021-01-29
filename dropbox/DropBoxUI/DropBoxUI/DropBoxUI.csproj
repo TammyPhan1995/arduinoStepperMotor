@@ -80,6 +80,7 @@
     <Compile Include="Models\BookScannedModel.cs" />
     <Compile Include="Models\BookScannedResponseModel.cs" />
     <Compile Include="Models\ErrorModel.cs" />
+    <Compile Include="Models\ReturnRequestModel.cs" />
     <Compile Include="Models\ReturnResponseModel.cs" />
     <Compile Include="Processors\BookProcessor.cs" />
     <Compile Include="ReturnForm.cs">

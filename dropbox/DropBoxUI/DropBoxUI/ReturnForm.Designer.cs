@@ -34,6 +34,10 @@
             this.spiner = new System.Windows.Forms.PictureBox();
             this.txtBookRfid = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.pnMessage = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.txtMessage = new System.Windows.Forms.RichTextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.pnFlow = new System.Windows.Forms.FlowLayoutPanel();
             this.pbBottom = new System.Windows.Forms.Panel();
             this.btStart = new System.Windows.Forms.Button();
@@ -42,18 +46,14 @@
             this.serialBackDoor = new System.IO.Ports.SerialPort(this.components);
             this.timerSession = new System.Windows.Forms.Timer(this.components);
             this.timerCountBook = new System.Windows.Forms.Timer(this.components);
-            this.pnMessage = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtMessage = new System.Windows.Forms.RichTextBox();
             this.timerWaitCloseDoor = new System.Windows.Forms.Timer(this.components);
-            this.panel3 = new System.Windows.Forms.Panel();
             this.lbNumber = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.spiner)).BeginInit();
             this.panel2.SuspendLayout();
-            this.pbBottom.SuspendLayout();
             this.pnMessage.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.pbBottom.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -96,6 +96,54 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1778, 785);
             this.panel2.TabIndex = 10;
+            // 
+            // pnMessage
+            // 
+            this.pnMessage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnMessage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(55)))), ((int)(((byte)(107)))));
+            this.pnMessage.Controls.Add(this.panel3);
+            this.pnMessage.Controls.Add(this.label1);
+            this.pnMessage.Location = new System.Drawing.Point(31, 552);
+            this.pnMessage.Name = "pnMessage";
+            this.pnMessage.Size = new System.Drawing.Size(1710, 127);
+            this.pnMessage.TabIndex = 1;
+            // 
+            // panel3
+            // 
+            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel3.BackColor = System.Drawing.Color.White;
+            this.panel3.Controls.Add(this.txtMessage);
+            this.panel3.Location = new System.Drawing.Point(4, 37);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(1703, 87);
+            this.panel3.TabIndex = 1;
+            // 
+            // txtMessage
+            // 
+            this.txtMessage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtMessage.BackColor = System.Drawing.Color.White;
+            this.txtMessage.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtMessage.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.txtMessage.Location = new System.Drawing.Point(12, 7);
+            this.txtMessage.Name = "txtMessage";
+            this.txtMessage.ReadOnly = true;
+            this.txtMessage.Size = new System.Drawing.Size(1678, 73);
+            this.txtMessage.TabIndex = 1;
+            this.txtMessage.TabStop = false;
+            this.txtMessage.Text = "";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(21, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(88, 24);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Message:";
             // 
             // pnFlow
             // 
@@ -154,58 +202,10 @@
             this.timerCountBook.Interval = 10000;
             this.timerCountBook.Tick += new System.EventHandler(this.timerCountBook_Tick);
             // 
-            // pnMessage
-            // 
-            this.pnMessage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnMessage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(55)))), ((int)(((byte)(107)))));
-            this.pnMessage.Controls.Add(this.panel3);
-            this.pnMessage.Controls.Add(this.label1);
-            this.pnMessage.Location = new System.Drawing.Point(31, 552);
-            this.pnMessage.Name = "pnMessage";
-            this.pnMessage.Size = new System.Drawing.Size(1710, 127);
-            this.pnMessage.TabIndex = 1;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(21, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(88, 24);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Message:";
-            // 
-            // txtMessage
-            // 
-            this.txtMessage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtMessage.BackColor = System.Drawing.Color.White;
-            this.txtMessage.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtMessage.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.txtMessage.Location = new System.Drawing.Point(12, 7);
-            this.txtMessage.Name = "txtMessage";
-            this.txtMessage.ReadOnly = true;
-            this.txtMessage.Size = new System.Drawing.Size(1678, 73);
-            this.txtMessage.TabIndex = 1;
-            this.txtMessage.TabStop = false;
-            this.txtMessage.Text = "";
-            // 
             // timerWaitCloseDoor
             // 
             this.timerWaitCloseDoor.Interval = 14000;
             this.timerWaitCloseDoor.Tick += new System.EventHandler(this.timerWaitCloseDoor_Tick);
-            // 
-            // panel3
-            // 
-            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel3.BackColor = System.Drawing.Color.White;
-            this.panel3.Controls.Add(this.txtMessage);
-            this.panel3.Location = new System.Drawing.Point(4, 37);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1703, 87);
-            this.panel3.TabIndex = 1;
             // 
             // lbNumber
             // 
@@ -233,11 +233,11 @@
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.spiner)).EndInit();
             this.panel2.ResumeLayout(false);
-            this.pbBottom.ResumeLayout(false);
-            this.pbBottom.PerformLayout();
             this.pnMessage.ResumeLayout(false);
             this.pnMessage.PerformLayout();
             this.panel3.ResumeLayout(false);
+            this.pbBottom.ResumeLayout(false);
+            this.pbBottom.PerformLayout();
             this.ResumeLayout(false);
 
         }
