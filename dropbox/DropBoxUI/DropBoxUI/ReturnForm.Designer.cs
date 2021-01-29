@@ -32,7 +32,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ReturnForm));
             this.panel1 = new System.Windows.Forms.Panel();
             this.spiner = new System.Windows.Forms.PictureBox();
-            this.lbMessage = new System.Windows.Forms.Label();
             this.txtBookRfid = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.pnFlow = new System.Windows.Forms.FlowLayoutPanel();
@@ -43,16 +42,24 @@
             this.serialBackDoor = new System.IO.Ports.SerialPort(this.components);
             this.timerSession = new System.Windows.Forms.Timer(this.components);
             this.timerCountBook = new System.Windows.Forms.Timer(this.components);
+            this.pnMessage = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtMessage = new System.Windows.Forms.RichTextBox();
+            this.timerWaitCloseDoor = new System.Windows.Forms.Timer(this.components);
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.lbNumber = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.spiner)).BeginInit();
             this.panel2.SuspendLayout();
             this.pbBottom.SuspendLayout();
+            this.pnMessage.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.lbNumber);
             this.panel1.Controls.Add(this.spiner);
-            this.panel1.Controls.Add(this.lbMessage);
             this.panel1.Controls.Add(this.txtBookRfid);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
@@ -71,16 +78,6 @@
             this.spiner.TabIndex = 6;
             this.spiner.TabStop = false;
             // 
-            // lbMessage
-            // 
-            this.lbMessage.AutoSize = true;
-            this.lbMessage.Location = new System.Drawing.Point(49, 19);
-            this.lbMessage.MaximumSize = new System.Drawing.Size(500, 0);
-            this.lbMessage.Name = "lbMessage";
-            this.lbMessage.Size = new System.Drawing.Size(69, 17);
-            this.lbMessage.TabIndex = 1;
-            this.lbMessage.Text = "Message:";
-            // 
             // txtBookRfid
             // 
             this.txtBookRfid.Location = new System.Drawing.Point(1082, 82);
@@ -91,6 +88,8 @@
             // 
             // panel2
             // 
+            this.panel2.BackColor = System.Drawing.Color.White;
+            this.panel2.Controls.Add(this.pnMessage);
             this.panel2.Controls.Add(this.pnFlow);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 144);
@@ -103,7 +102,7 @@
             this.pnFlow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.pnFlow.Location = new System.Drawing.Point(31, 22);
             this.pnFlow.Name = "pnFlow";
-            this.pnFlow.Size = new System.Drawing.Size(1710, 645);
+            this.pnFlow.Size = new System.Drawing.Size(1710, 268);
             this.pnFlow.TabIndex = 0;
             // 
             // pbBottom
@@ -119,12 +118,12 @@
             // btStart
             // 
             this.btStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btStart.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btStart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(55)))), ((int)(((byte)(107)))));
             this.btStart.FlatAppearance.BorderSize = 0;
             this.btStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btStart.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.btStart.ForeColor = System.Drawing.Color.White;
-            this.btStart.Location = new System.Drawing.Point(1082, 30);
+            this.btStart.Location = new System.Drawing.Point(1611, 25);
             this.btStart.Name = "btStart";
             this.btStart.Size = new System.Drawing.Size(130, 37);
             this.btStart.TabIndex = 9;
@@ -139,19 +138,11 @@
             this.lbsession.AutoSize = true;
             this.lbsession.Font = new System.Drawing.Font("Calibri", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.lbsession.ForeColor = System.Drawing.Color.Firebrick;
-            this.lbsession.Location = new System.Drawing.Point(12, 25);
+            this.lbsession.Location = new System.Drawing.Point(25, 25);
             this.lbsession.Name = "lbsession";
             this.lbsession.Size = new System.Drawing.Size(397, 49);
             this.lbsession.TabIndex = 11;
             this.lbsession.Text = "SESSION TIMEOUT: 60 ";
-            // 
-            // serialFrontDoor
-            // 
-            this.serialFrontDoor.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.serialFontDoor_DataReceived);
-            // 
-            // serialBackDoor
-            // 
-            this.serialBackDoor.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.serialBackDoor_DataReceived);
             // 
             // timerSession
             // 
@@ -163,10 +154,73 @@
             this.timerCountBook.Interval = 10000;
             this.timerCountBook.Tick += new System.EventHandler(this.timerCountBook_Tick);
             // 
+            // pnMessage
+            // 
+            this.pnMessage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnMessage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(55)))), ((int)(((byte)(107)))));
+            this.pnMessage.Controls.Add(this.panel3);
+            this.pnMessage.Controls.Add(this.label1);
+            this.pnMessage.Location = new System.Drawing.Point(31, 552);
+            this.pnMessage.Name = "pnMessage";
+            this.pnMessage.Size = new System.Drawing.Size(1710, 127);
+            this.pnMessage.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(21, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(88, 24);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Message:";
+            // 
+            // txtMessage
+            // 
+            this.txtMessage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtMessage.BackColor = System.Drawing.Color.White;
+            this.txtMessage.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtMessage.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.txtMessage.Location = new System.Drawing.Point(12, 7);
+            this.txtMessage.Name = "txtMessage";
+            this.txtMessage.ReadOnly = true;
+            this.txtMessage.Size = new System.Drawing.Size(1678, 73);
+            this.txtMessage.TabIndex = 1;
+            this.txtMessage.TabStop = false;
+            this.txtMessage.Text = "";
+            // 
+            // timerWaitCloseDoor
+            // 
+            this.timerWaitCloseDoor.Interval = 14000;
+            this.timerWaitCloseDoor.Tick += new System.EventHandler(this.timerWaitCloseDoor_Tick);
+            // 
+            // panel3
+            // 
+            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel3.BackColor = System.Drawing.Color.White;
+            this.panel3.Controls.Add(this.txtMessage);
+            this.panel3.Location = new System.Drawing.Point(4, 37);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(1703, 87);
+            this.panel3.TabIndex = 1;
+            // 
+            // lbNumber
+            // 
+            this.lbNumber.AutoSize = true;
+            this.lbNumber.Location = new System.Drawing.Point(35, 34);
+            this.lbNumber.Name = "lbNumber";
+            this.lbNumber.Size = new System.Drawing.Size(46, 17);
+            this.lbNumber.TabIndex = 7;
+            this.lbNumber.Text = "label2";
+            // 
             // ReturnForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1778, 929);
             this.Controls.Add(this.pbBottom);
             this.Controls.Add(this.panel2);
@@ -181,6 +235,9 @@
             this.panel2.ResumeLayout(false);
             this.pbBottom.ResumeLayout(false);
             this.pbBottom.PerformLayout();
+            this.pnMessage.ResumeLayout(false);
+            this.pnMessage.PerformLayout();
+            this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -196,9 +253,14 @@
         private System.IO.Ports.SerialPort serialBackDoor;
         private System.Windows.Forms.Timer timerSession;
         private System.Windows.Forms.TextBox txtBookRfid;
-        private System.Windows.Forms.Label lbMessage;
         private System.Windows.Forms.Timer timerCountBook;
         private System.Windows.Forms.PictureBox spiner;
         private System.Windows.Forms.FlowLayoutPanel pnFlow;
+        private System.Windows.Forms.Panel pnMessage;
+        private System.Windows.Forms.RichTextBox txtMessage;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Timer timerWaitCloseDoor;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Label lbNumber;
     }
 }

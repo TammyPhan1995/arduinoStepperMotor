@@ -6,8 +6,6 @@ using System.Drawing;
 using System.IO.Ports;
 using System.Linq;
 using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using DropBoxUI.Models;
 using DropBoxUI.Processors;
@@ -64,6 +62,7 @@ namespace DropBoxUI
         private string bookRfid;
         private int numberOfBookScanned = 0;
 
+        private IDictionary<String, String> bookCodeMap;
 
 
         public ReturnForm(string portFont, string portBack)
@@ -79,23 +78,22 @@ namespace DropBoxUI
             //connectToSerialPortBackDoor(portBack);
             connectToSerialPortFrontDoor(portFont);
             resetState();
-           
+            bookCodeMap = new Dictionary<String, String>();
+
         }
 
 
         private void connectToSerialPortFrontDoor(string portName)
         {
-            serialFrontDoor.PortName = portName;
-            serialFrontDoor.BaudRate = 9600;
-            serialFrontDoor.Parity = Parity.None;
-            serialFrontDoor.DataBits = 8;
-            serialFrontDoor.StopBits = StopBits.One;
-
             try
             {
+                serialFrontDoor.PortName = portName;
+                serialFrontDoor.BaudRate = 9600;
+                serialFrontDoor.Parity = Parity.None;
+                serialFrontDoor.DataBits = 8;
+                serialFrontDoor.StopBits = StopBits.One;
                 serialFrontDoor.Open();
                 serialFrontDoor.Write("#CONX\n");
-                Console.WriteLine("Connected to front port");
             }
             catch (Exception e)
             {
@@ -105,14 +103,13 @@ namespace DropBoxUI
 
         private void connectToSerialPortBackDoor(string portName)
         {
-            serialBackDoor.PortName = portName;
-            serialBackDoor.BaudRate = 9600;
-            serialBackDoor.Parity = Parity.None;
-            serialBackDoor.DataBits = 8;
-            serialBackDoor.StopBits = StopBits.One;
-
             try
             {
+                serialBackDoor.PortName = portName;
+                serialBackDoor.BaudRate = 9600;
+                serialBackDoor.Parity = Parity.None;
+                serialBackDoor.DataBits = 8;
+                serialBackDoor.StopBits = StopBits.One;
                 serialBackDoor.Open();
                 serialBackDoor.Write("#CONX\n");
             }
@@ -139,11 +136,6 @@ namespace DropBoxUI
             //}
         }
 
-        //get response from front door arduino to change UI state
-        private void serialFontDoor_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
-        {           
-        }
-
 
 
         private void timerSession_Tick(object sender, EventArgs e)
@@ -154,7 +146,7 @@ namespace DropBoxUI
             {
                 timerSession.Stop();
                 timerSession.Enabled = false;
-                //reset lại từ đầu
+                resetState();
             }
         }
 
@@ -166,6 +158,7 @@ namespace DropBoxUI
             timerSession.Enabled = false;
             timerCountBook.Enabled = false;
             sesionTime = Constant.PROCESS_SESSION_TIME_OUT;
+            lbsession.Text = "SESSION TIMEOUT: " + this.sesionTime;
             spiner.Hide();
             txtBookRfid.Text = "";
             txtBookRfid.Enabled = false;
@@ -173,15 +166,16 @@ namespace DropBoxUI
             bookRfid = "";
             btStart.Enabled = true;
             btStart.Text = ButtonText.START.ToString();
-            lbMessage.Text = "Click start to begin return";
+            txtMessage.Text = "Please click on start button to begin";
             lbsession.Hide();
+            processStatus = ProcessStatus.RESET;
+
         }
 
         private async void callReturnAPI()
         {
             timerSession.Enabled = false;
             spiner.Show();
-            //call here
             ReturnResponseModel rs = await BookProcessor.returnBook(bookRfid);
             spiner.Hide();
             timerSession.Enabled = true;
@@ -192,17 +186,21 @@ namespace DropBoxUI
                     processStatus = ProcessStatus.RETURNED;
                     btStart.Text = ButtonText.DONE.ToString();
                     btStart.Enabled = true;
-
+                    txtMessage.Text = "Returned item";
                     //openBackDoor();
                 }
                 else if (rs.book.status.Contains(BookStatus.INVALID.ToString()))
                 {
                     processStatus = ProcessStatus.ERROR;
+                    txtMessage.Text = "Return failed. Please take you book out and return at libarian counter as overdue. " +
+                        "The door wil close in few second.";
                     openFrontDoor();
                 }
                 else if (rs.book.status.Contains(BookStatus.OVERDUE.ToString()))
                 {
                     processStatus = ProcessStatus.ERROR;
+                    txtMessage.Text = "Return failed. This book hasn't borrowed yet. Please take it out and contact the libarian " +
+                        "The door wil close in few second.";
                     openFrontDoor();
                 }
                 BookReturnItem item = new BookReturnItem(rs.book);
@@ -211,8 +209,9 @@ namespace DropBoxUI
             }
             else
             {
-                lbMessage.Text = rs.errorMessage;
                 processStatus = ProcessStatus.ERROR;
+                txtMessage.Text = "Return failed. Please take the item out and contact the libarian" +
+                       "The door wil close in few second.";
                 openFrontDoor();
             }
 
@@ -220,18 +219,24 @@ namespace DropBoxUI
 
         private void txtBookRfid_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.Enter 
-                && backDoorStatus == DoorStatus.BACK_CLOSED
-                && frontDoorStatus == DoorStatus.FRONT_CLOSED)
+            if(e.KeyCode == Keys.Enter)
             {
                 bookRfid = txtBookRfid.Text.Trim();
                 if(bookRfid.Length == Constant.TID_LENGTH)
                 {
-                    numberOfBookScanned++;
+                    if (!bookCodeMap.ContainsKey(bookRfid))
+                    {
+                        numberOfBookScanned++;
+                        lbNumber.Text = "Numnber book scanned: " + numberOfBookScanned;
+                        bookCodeMap.Add(bookRfid, bookRfid);
+                    }
                 }
                 else
                 {
-                    lbMessage.Text = "Message: Invalid item. Open front door";
+                    processStatus = ProcessStatus.ERROR;
+                    timerCountBook.Enabled = false;
+                    txtMessage.Text = "Invalid item. Please take it out. The door will closed in few second.";
+                    openFrontDoor();
                 }
                 txtBookRfid.Text = "";
                 txtBookRfid.Focus();
@@ -241,21 +246,26 @@ namespace DropBoxUI
         //call when close front door to scan
         private void timerCountBook_Tick(object sender, EventArgs e)
         {
-            Console.WriteLine("het count");
             timerCountBook.Stop();
             timerCountBook.Enabled = false;
-            Console.WriteLine("stop conter");
             txtBookRfid.Text = "";
             txtBookRfid.Enabled = false;
             if (numberOfBookScanned < 1)
             {
-                Console.WriteLine("No item. Cancel return");
-                lbMessage.Text = "No item. Cancel return"; //hien message trong vài giây r reset
-                processStatus = ProcessStatus.RESET;
+                txtMessage.Text = "There is no item. The system will cancel automatically.";
+                var t = new Timer();
+                t.Interval = 4000;
+                t.Tick += (s, d) =>
+                {
+                    resetState();
+                    t.Stop();
+                };
+                t.Start();
+                
             }
             else if (numberOfBookScanned > 1)
             {
-                lbMessage.Text = "Message: Only one item per time. Open front door";
+                txtMessage.Text = "Only one 1 item each transaction. Please take your items out. The door will close in few second.";
                 processStatus = ProcessStatus.ERROR;
                 openFrontDoor();
             }
@@ -267,59 +277,32 @@ namespace DropBoxUI
         }
 
         //bat dau tu day
-        private void btStart_Click(object sender, EventArgs e)
+        private  void btStart_Click(object sender, EventArgs e)
         {
             if(btStart.Text == ButtonText.START.ToString())
             {
-                btStart.Enabled = false;
-                lbMessage.Text = "Place 1 book to when door opens";
-                processStatus = ProcessStatus.START;
-                timerSession.Enabled = true;
                 lbsession.Show();
+                timerSession.Enabled = true;
+                btStart.Enabled = false;
+                processStatus = ProcessStatus.START;
+                txtMessage.Text =  "Please put only 1 book. The door will close in few second.";
                 openFrontDoor();
-            }else if (btStart.Text == ButtonText.DONE.ToString())
+            }
+            else if (btStart.Text == ButtonText.DONE.ToString())
             {
-                //reset
                 resetState();
             }
-
-
-
         }
 
         private void openFrontDoor()
         {
             if (serialFrontDoor.IsOpen)
             {
-                lbMessage.Text = "Opening Front Door";
+        
                 serialFrontDoor.Write(ArduinoMessage.RQ_FONT_OPEN);
                 frontDoorStatus = DoorStatus.FRONT_OPENING;
             }
-            while (serialFrontDoor.IsOpen )
-            {
-                fontMsg = serialFrontDoor.ReadExisting();
-                Console.WriteLine("--------" + fontMsg);
-                if (fontMsg.Contains(ArduinoMessage.RP_FONT_OPENED))
-                {
-                    frontDoorStatus = DoorStatus.FRONT_OPENED;
-                }
-                else if (fontMsg.Contains(ArduinoMessage.RP_FONT_CLOSED))
-                {
-                    frontDoorStatus = DoorStatus.FRONT_CLOSED;
-                    if (processStatus == ProcessStatus.START)
-                    {
-                        Console.WriteLine("bắt đầu scan");
-                        enableScanner();
-                        timerCountBook.Enabled = true;
-                    }
-                    else if (processStatus == ProcessStatus.ERROR)
-                    {
-                        resetState();
-                    }
-                    break;
-                }
-                Thread.Sleep(1000);
-            }
+            timerWaitCloseDoor.Enabled = true;
         }
 
         private void openBackDoor()
@@ -329,14 +312,30 @@ namespace DropBoxUI
                 serialBackDoor.Write(ArduinoMessage.RQ_BACK_OPEN);
                 backDoorStatus = DoorStatus.BACK_OPENING;
             }
+            
         }
 
         private void enableScanner()
         {
+            txtMessage.Text = "Scanning...";
             txtBookRfid.Text = "";
             txtBookRfid.Enabled = true;
             txtBookRfid.Focus();
         }
 
+        private void timerWaitCloseDoor_Tick(object sender, EventArgs e)
+        {
+            timerWaitCloseDoor.Enabled = false;
+            if (processStatus == ProcessStatus.START)
+            {
+                Console.WriteLine("start scanning");
+                enableScanner();
+                timerCountBook.Enabled = true;
+            }
+            else if (processStatus == ProcessStatus.ERROR)
+            {
+                resetState();
+            }
+        }
     }
 }

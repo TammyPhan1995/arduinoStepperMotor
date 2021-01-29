@@ -17,7 +17,7 @@ namespace DropBoxUI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //APIHelpers.initializeClient();
+            APIHelpers.initializeClient();
             Application.Run(new SetUpForm());
         }
     }
