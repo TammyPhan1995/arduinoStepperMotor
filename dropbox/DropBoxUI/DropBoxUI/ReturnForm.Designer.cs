@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ReturnForm));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lbNumber = new System.Windows.Forms.Label();
             this.spiner = new System.Windows.Forms.PictureBox();
             this.txtBookRfid = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -47,7 +48,7 @@
             this.timerSession = new System.Windows.Forms.Timer(this.components);
             this.timerCountBook = new System.Windows.Forms.Timer(this.components);
             this.timerWaitCloseDoor = new System.Windows.Forms.Timer(this.components);
-            this.lbNumber = new System.Windows.Forms.Label();
+            this.timerResetSuccess = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.spiner)).BeginInit();
             this.panel2.SuspendLayout();
@@ -66,6 +67,15 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1778, 144);
             this.panel1.TabIndex = 9;
+            // 
+            // lbNumber
+            // 
+            this.lbNumber.AutoSize = true;
+            this.lbNumber.Location = new System.Drawing.Point(35, 34);
+            this.lbNumber.Name = "lbNumber";
+            this.lbNumber.Size = new System.Drawing.Size(46, 17);
+            this.lbNumber.TabIndex = 7;
+            this.lbNumber.Text = "label2";
             // 
             // spiner
             // 
@@ -125,7 +135,7 @@
             this.txtMessage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.txtMessage.BackColor = System.Drawing.Color.White;
             this.txtMessage.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtMessage.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.txtMessage.Font = new System.Drawing.Font("Calibri", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.txtMessage.Location = new System.Drawing.Point(12, 7);
             this.txtMessage.Name = "txtMessage";
             this.txtMessage.ReadOnly = true;
@@ -137,11 +147,11 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.label1.Font = new System.Drawing.Font("Calibri", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(21, 9);
+            this.label1.Location = new System.Drawing.Point(11, 5);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(88, 24);
+            this.label1.Size = new System.Drawing.Size(108, 29);
             this.label1.TabIndex = 0;
             this.label1.Text = "Message:";
             // 
@@ -207,14 +217,10 @@
             this.timerWaitCloseDoor.Interval = 14000;
             this.timerWaitCloseDoor.Tick += new System.EventHandler(this.timerWaitCloseDoor_Tick);
             // 
-            // lbNumber
+            // timerResetSuccess
             // 
-            this.lbNumber.AutoSize = true;
-            this.lbNumber.Location = new System.Drawing.Point(35, 34);
-            this.lbNumber.Name = "lbNumber";
-            this.lbNumber.Size = new System.Drawing.Size(46, 17);
-            this.lbNumber.TabIndex = 7;
-            this.lbNumber.Text = "label2";
+            this.timerResetSuccess.Interval = 10000;
+            this.timerResetSuccess.Tick += new System.EventHandler(this.timerResetSuccess_Tick);
             // 
             // ReturnForm
             // 
@@ -262,5 +268,6 @@
         private System.Windows.Forms.Timer timerWaitCloseDoor;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label lbNumber;
+        private System.Windows.Forms.Timer timerResetSuccess;
     }
 }

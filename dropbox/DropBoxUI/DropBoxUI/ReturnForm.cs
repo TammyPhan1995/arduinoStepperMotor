@@ -75,7 +75,7 @@ namespace DropBoxUI
 
         private void ReturnForm_Load(object sender, EventArgs e)
         {
-            //connectToSerialPortBackDoor(portBack);
+            connectToSerialPortBackDoor(portBack);
             connectToSerialPortFrontDoor(portFont);
             bookCodeMap = new Dictionary<String, String>();
             resetState();
@@ -165,7 +165,7 @@ namespace DropBoxUI
             bookRfid = "";
             btStart.Enabled = true;
             btStart.Text = ButtonText.START.ToString();
-            txtMessage.Text = "Please click on start button to begin";
+            txtMessage.Text = "Please click on start button to begin/open the door";
             lbsession.Hide();
             processStatus = ProcessStatus.RESET;
             lbNumber.Text = "Numnber book scanned: " + numberOfBookScanned;
@@ -188,7 +188,7 @@ namespace DropBoxUI
                     btStart.Text = ButtonText.DONE.ToString();
                     btStart.Enabled = true;
                     txtMessage.Text = "Returned item";
-                    //openBackDoor();
+                    openBackDoor();
                 }
                 else if (rs.book.status.Contains(BookStatus.OVERDUE.ToString()))
                 {
@@ -313,6 +313,7 @@ namespace DropBoxUI
                 serialBackDoor.Write(ArduinoMessage.RQ_BACK_OPEN);
                 backDoorStatus = DoorStatus.BACK_OPENING;
             }
+            timerResetSuccess.Enabled = true;
             
         }
 
@@ -336,6 +337,12 @@ namespace DropBoxUI
             {
                 resetState();
             }
+        }
+
+        private void timerResetSuccess_Tick(object sender, EventArgs e)
+        {
+            timerResetSuccess.Enabled = false;
+            resetState();
         }
     }
 }
