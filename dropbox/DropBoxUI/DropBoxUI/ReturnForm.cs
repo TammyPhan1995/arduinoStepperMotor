@@ -178,6 +178,10 @@ namespace DropBoxUI
             timerSession.Enabled = false;
             spiner.Show();
             ReturnResponseModel rs = await BookProcessor.returnBook(bookRfid);
+            if (rs.isSuccess)
+            {
+                await EmailProcessor.emailReturn(rs.book);
+            }
             spiner.Hide();
             timerSession.Enabled = true;
             if (rs.isSuccess)

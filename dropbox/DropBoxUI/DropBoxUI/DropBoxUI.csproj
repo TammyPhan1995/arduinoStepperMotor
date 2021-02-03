@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="APIs\BookAPI.cs" />
+    <Compile Include="APIs\EmailAPI.cs" />
     <Compile Include="BookReturnItem.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -83,6 +84,7 @@
     <Compile Include="Models\ReturnRequestModel.cs" />
     <Compile Include="Models\ReturnResponseModel.cs" />
     <Compile Include="Processors\BookProcessor.cs" />
+    <Compile Include="Processors\EmailProcessor.cs" />
     <Compile Include="ReturnForm.cs">
       <SubType>Form</SubType>
     </Compile>
