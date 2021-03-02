@@ -150,5 +150,11 @@
   <ItemGroup>
     <Folder Include="Enum\" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo_dark_bcg.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\book_drop_station.PNG" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

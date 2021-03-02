@@ -79,6 +79,8 @@ namespace DropBoxUI
             connectToSerialPortFrontDoor(portFont);
             bookCodeMap = new Dictionary<String, String>();
             resetState();
+            int x = (panel1.Width - picTitle.Width) / 2;
+            picTitle.Location = new Point(x, picTitle.Location.Y);
         }
 
 
@@ -143,9 +145,17 @@ namespace DropBoxUI
             lbsession.Text = "SESSION TIMEOUT: " + this.sesionTime;
             if (sesionTime == 0)
             {
-                timerSession.Stop();
-                timerSession.Enabled = false;
-                resetState();
+                if (frontDoorStatus.Equals(DoorStatus.FRONT_OPENING))
+                {
+                    resetState();
+                    btStart.Enabled = false;
+                }
+                else
+                {
+                    timerSession.Stop();
+                    timerSession.Enabled = false;
+                    resetState();
+                }
             }
         }
 
@@ -165,6 +175,7 @@ namespace DropBoxUI
             bookRfid = "";
             btStart.Enabled = true;
             btStart.Text = ButtonText.START.ToString();
+            txtMessage.ForeColor = Color.Black;
             txtMessage.Text = "Please click on start button to begin/open the door";
             lbsession.Hide();
             processStatus = ProcessStatus.RESET;
@@ -191,12 +202,14 @@ namespace DropBoxUI
                     processStatus = ProcessStatus.RETURNED;
                     btStart.Text = ButtonText.DONE.ToString();
                     btStart.Enabled = true;
+                    txtMessage.ForeColor = Color.Green;
                     txtMessage.Text = "Returned item";
                     openBackDoor();
                 }
                 else if (rs.book.status.Contains(BookStatus.OVERDUE.ToString()))
                 {
                     processStatus = ProcessStatus.ERROR;
+                    txtMessage.ForeColor = Color.Red;
                     txtMessage.Text = "Return failed. Please take you book out and return at libarian counter as overdue. " +
                         "The door wil close in few second.";
                     openFrontDoor();
@@ -204,7 +217,8 @@ namespace DropBoxUI
                 else if (rs.book.status.Contains(BookStatus.INVALID.ToString()))
                 {
                     processStatus = ProcessStatus.ERROR;
-                    txtMessage.Text = "Return failed. This book hasn't borrowed yet. Please take it out and contact the libarian " +
+                    txtMessage.ForeColor = Color.Red;
+                    txtMessage.Text = "Return failed. This book hasn't borrowed yet. Please take it out and contact the libarian. " +
                         "The door wil close in few second.";
                     openFrontDoor();
                 }
@@ -215,6 +229,7 @@ namespace DropBoxUI
             else
             {
                 processStatus = ProcessStatus.ERROR;
+                txtMessage.ForeColor = Color.Red;
                 txtMessage.Text = "Return failed. Please take the item out and contact the libarian. " +
                        "The door wil close in few second.";
                 openFrontDoor();
@@ -226,6 +241,7 @@ namespace DropBoxUI
         {
             if(e.KeyCode == Keys.Enter)
             {
+                txtBookRfid.Enabled = false;
                 bookRfid = txtBookRfid.Text.Trim();
                 if(bookRfid.Length == Constant.TID_LENGTH)
                 {
@@ -240,10 +256,12 @@ namespace DropBoxUI
                 {
                     processStatus = ProcessStatus.ERROR;
                     timerCountBook.Enabled = false;
+                    txtMessage.ForeColor = Color.Red;
                     txtMessage.Text = "Invalid item. Please take it out. The door will closed in few second.";
                     openFrontDoor();
                 }
                 txtBookRfid.Text = "";
+                txtBookRfid.Enabled = true;
                 txtBookRfid.Focus();
             }
         }
@@ -257,6 +275,7 @@ namespace DropBoxUI
             txtBookRfid.Enabled = false;
             if (numberOfBookScanned < 1)
             {
+                txtMessage.ForeColor = Color.Red;
                 txtMessage.Text = "There is no item. The system will cancel automatically.";
                 var t = new Timer();
                 t.Interval = 4000;
@@ -270,6 +289,7 @@ namespace DropBoxUI
             }
             else if (numberOfBookScanned > 1)
             {
+                txtMessage.ForeColor = Color.Red;
                 txtMessage.Text = "Only one 1 item each transaction. Please take your items out. The door will close in few second.";
                 processStatus = ProcessStatus.ERROR;
                 openFrontDoor();
@@ -290,6 +310,7 @@ namespace DropBoxUI
                 timerSession.Enabled = true;
                 btStart.Enabled = false;
                 processStatus = ProcessStatus.START;
+                txtMessage.ForeColor = Color.Black;
                 txtMessage.Text =  "Please put only 1 book. The door will close in few second.";
                 openFrontDoor();
             }
@@ -323,6 +344,7 @@ namespace DropBoxUI
 
         private void enableScanner()
         {
+            txtMessage.ForeColor = Color.Black;
             txtMessage.Text = "Scanning...";
             txtBookRfid.Text = "";
             txtBookRfid.Enabled = true;
@@ -332,6 +354,7 @@ namespace DropBoxUI
         private void timerWaitCloseDoor_Tick(object sender, EventArgs e)
         {
             timerWaitCloseDoor.Enabled = false;
+            frontDoorStatus = DoorStatus.FRONT_CLOSED;
             if (processStatus == ProcessStatus.START)
             {
                 enableScanner();

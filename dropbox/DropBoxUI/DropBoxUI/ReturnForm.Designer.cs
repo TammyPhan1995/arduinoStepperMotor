@@ -32,7 +32,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ReturnForm));
             this.panel1 = new System.Windows.Forms.Panel();
             this.lbNumber = new System.Windows.Forms.Label();
-            this.spiner = new System.Windows.Forms.PictureBox();
             this.txtBookRfid = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.pnMessage = new System.Windows.Forms.Panel();
@@ -49,48 +48,43 @@
             this.timerCountBook = new System.Windows.Forms.Timer(this.components);
             this.timerWaitCloseDoor = new System.Windows.Forms.Timer(this.components);
             this.timerResetSuccess = new System.Windows.Forms.Timer(this.components);
+            this.spiner = new System.Windows.Forms.PictureBox();
+            this.picTitle = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.spiner)).BeginInit();
             this.panel2.SuspendLayout();
             this.pnMessage.SuspendLayout();
             this.panel3.SuspendLayout();
             this.pbBottom.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.spiner)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picTitle)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(55)))), ((int)(((byte)(107)))));
+            this.panel1.Controls.Add(this.pictureBox1);
+            this.panel1.Controls.Add(this.picTitle);
             this.panel1.Controls.Add(this.lbNumber);
-            this.panel1.Controls.Add(this.spiner);
-            this.panel1.Controls.Add(this.txtBookRfid);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1778, 144);
+            this.panel1.Size = new System.Drawing.Size(1778, 208);
             this.panel1.TabIndex = 9;
             // 
             // lbNumber
             // 
             this.lbNumber.AutoSize = true;
-            this.lbNumber.Location = new System.Drawing.Point(35, 34);
+            this.lbNumber.Location = new System.Drawing.Point(32, 97);
             this.lbNumber.Name = "lbNumber";
-            this.lbNumber.Size = new System.Drawing.Size(46, 17);
+            this.lbNumber.Size = new System.Drawing.Size(12, 17);
             this.lbNumber.TabIndex = 7;
-            this.lbNumber.Text = "label2";
-            // 
-            // spiner
-            // 
-            this.spiner.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.spiner.Image = global::DropBoxUI.Properties.Resources.Spinner_trans__1_;
-            this.spiner.Location = new System.Drawing.Point(742, 54);
-            this.spiner.Name = "spiner";
-            this.spiner.Size = new System.Drawing.Size(101, 71);
-            this.spiner.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.spiner.TabIndex = 6;
-            this.spiner.TabStop = false;
+            this.lbNumber.Text = " ";
             // 
             // txtBookRfid
             // 
-            this.txtBookRfid.Location = new System.Drawing.Point(1082, 82);
+            this.txtBookRfid.Location = new System.Drawing.Point(760, 274);
             this.txtBookRfid.Name = "txtBookRfid";
             this.txtBookRfid.Size = new System.Drawing.Size(281, 22);
             this.txtBookRfid.TabIndex = 0;
@@ -100,11 +94,13 @@
             // 
             this.panel2.BackColor = System.Drawing.Color.White;
             this.panel2.Controls.Add(this.pnMessage);
+            this.panel2.Controls.Add(this.spiner);
+            this.panel2.Controls.Add(this.txtBookRfid);
             this.panel2.Controls.Add(this.pnFlow);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 144);
+            this.panel2.Location = new System.Drawing.Point(0, 208);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1778, 785);
+            this.panel2.Size = new System.Drawing.Size(1778, 721);
             this.panel2.TabIndex = 10;
             // 
             // pnMessage
@@ -114,7 +110,7 @@
             this.pnMessage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(55)))), ((int)(((byte)(107)))));
             this.pnMessage.Controls.Add(this.panel3);
             this.pnMessage.Controls.Add(this.label1);
-            this.pnMessage.Location = new System.Drawing.Point(31, 552);
+            this.pnMessage.Location = new System.Drawing.Point(31, 488);
             this.pnMessage.Name = "pnMessage";
             this.pnMessage.Size = new System.Drawing.Size(1710, 127);
             this.pnMessage.TabIndex = 1;
@@ -160,7 +156,7 @@
             this.pnFlow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.pnFlow.Location = new System.Drawing.Point(31, 22);
             this.pnFlow.Name = "pnFlow";
-            this.pnFlow.Size = new System.Drawing.Size(1710, 268);
+            this.pnFlow.Size = new System.Drawing.Size(1710, 204);
             this.pnFlow.TabIndex = 0;
             // 
             // pbBottom
@@ -222,6 +218,38 @@
             this.timerResetSuccess.Interval = 10000;
             this.timerResetSuccess.Tick += new System.EventHandler(this.timerResetSuccess_Tick);
             // 
+            // spiner
+            // 
+            this.spiner.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.spiner.Image = global::DropBoxUI.Properties.Resources.Spinner_trans__1_;
+            this.spiner.Location = new System.Drawing.Point(842, 324);
+            this.spiner.Name = "spiner";
+            this.spiner.Size = new System.Drawing.Size(101, 71);
+            this.spiner.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.spiner.TabIndex = 6;
+            this.spiner.TabStop = false;
+            // 
+            // picTitle
+            // 
+            this.picTitle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.picTitle.Image = global::DropBoxUI.Properties.Resources.book_drop_station;
+            this.picTitle.Location = new System.Drawing.Point(0, 66);
+            this.picTitle.Name = "picTitle";
+            this.picTitle.Size = new System.Drawing.Size(1775, 69);
+            this.picTitle.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.picTitle.TabIndex = 9;
+            this.picTitle.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::DropBoxUI.Properties.Resources.logo_dark_bcg;
+            this.pictureBox1.Location = new System.Drawing.Point(21, 41);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(237, 111);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 8;
+            this.pictureBox1.TabStop = false;
+            // 
             // ReturnForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -237,13 +265,16 @@
             this.Load += new System.EventHandler(this.ReturnForm_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.spiner)).EndInit();
             this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.pnMessage.ResumeLayout(false);
             this.pnMessage.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.pbBottom.ResumeLayout(false);
             this.pbBottom.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.spiner)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picTitle)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -269,5 +300,7 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label lbNumber;
         private System.Windows.Forms.Timer timerResetSuccess;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox picTitle;
     }
 }

@@ -63,6 +63,26 @@ namespace DropBoxUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap book_drop_station {
+            get {
+                object obj = ResourceManager.GetObject("book_drop_station", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap logo_dark_bcg {
+            get {
+                object obj = ResourceManager.GetObject("logo_dark_bcg", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Spinner_trans__1_ {
             get {
                 object obj = ResourceManager.GetObject("Spinner-trans (1)", resourceCulture);
