@@ -148,6 +148,8 @@ namespace DropBoxUI
                 if (frontDoorStatus.Equals(DoorStatus.FRONT_OPENING))
                 {
                     resetState();
+                    txtMessage.ForeColor = Color.Black;
+                    txtMessage.Text = "Please wait until the door close to start a new transaction.";
                     btStart.Enabled = false;
                 }
                 else
@@ -204,6 +206,7 @@ namespace DropBoxUI
                     btStart.Enabled = true;
                     txtMessage.ForeColor = Color.Green;
                     txtMessage.Text = "Returned item";
+                    txtBookRfid.Enabled = false;
                     openBackDoor();
                 }
                 else if (rs.book.status.Contains(BookStatus.OVERDUE.ToString()))
@@ -212,6 +215,7 @@ namespace DropBoxUI
                     txtMessage.ForeColor = Color.Red;
                     txtMessage.Text = "Return failed. Please take you book out and return at libarian counter as overdue. " +
                         "The door wil close in few second.";
+                    txtBookRfid.Enabled = false;
                     openFrontDoor();
                 }
                 else if (rs.book.status.Contains(BookStatus.INVALID.ToString()))
@@ -220,6 +224,7 @@ namespace DropBoxUI
                     txtMessage.ForeColor = Color.Red;
                     txtMessage.Text = "Return failed. This book hasn't borrowed yet. Please take it out and contact the libarian. " +
                         "The door wil close in few second.";
+                    txtBookRfid.Enabled = false;
                     openFrontDoor();
                 }
                 BookReturnItem item = new BookReturnItem(rs.book);
@@ -232,6 +237,7 @@ namespace DropBoxUI
                 txtMessage.ForeColor = Color.Red;
                 txtMessage.Text = "Return failed. Please take the item out and contact the libarian. " +
                        "The door wil close in few second.";
+                txtBookRfid.Enabled = false;
                 openFrontDoor();
             }
 
@@ -258,6 +264,7 @@ namespace DropBoxUI
                     timerCountBook.Enabled = false;
                     txtMessage.ForeColor = Color.Red;
                     txtMessage.Text = "Invalid item. Please take it out. The door will closed in few second.";
+                    txtBookRfid.Enabled = false;
                     openFrontDoor();
                 }
                 txtBookRfid.Text = "";
@@ -277,6 +284,7 @@ namespace DropBoxUI
             {
                 txtMessage.ForeColor = Color.Red;
                 txtMessage.Text = "There is no item. The system will cancel automatically.";
+                txtBookRfid.Enabled = false;
                 var t = new Timer();
                 t.Interval = 4000;
                 t.Tick += (s, d) =>
@@ -291,6 +299,7 @@ namespace DropBoxUI
             {
                 txtMessage.ForeColor = Color.Red;
                 txtMessage.Text = "Only one 1 item each transaction. Please take your items out. The door will close in few second.";
+                txtBookRfid.Enabled = false;
                 processStatus = ProcessStatus.ERROR;
                 openFrontDoor();
             }
