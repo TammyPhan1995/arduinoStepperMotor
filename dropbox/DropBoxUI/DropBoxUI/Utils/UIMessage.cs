@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace DropBoxUI.Utils
 {
-    class UIMessage
+    public class UIMessage
     {
+        public static int MAX_STRING_LENGTH = 100;
+
     }
 }

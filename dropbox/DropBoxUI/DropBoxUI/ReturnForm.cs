@@ -98,7 +98,8 @@ namespace DropBoxUI
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                txtMessage.ForeColor = Color.Red;
+                txtMessage.Text = e.Message;
             }
         }
 
@@ -116,30 +117,14 @@ namespace DropBoxUI
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                txtMessage.ForeColor = Color.Red;
+                txtMessage.Text = e.Message;
             }
         }
 
 
 
-
-        //get response from back door arduino to change UI state
-        private void serialBackDoor_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
-        {
-           
-            //backMsg = serialBackDoor.ReadLine();
-            //if (backMsg.Contains(ArduinoMessage.RP_BACK_OPENED))
-            //{
-            //    backDoorStatus = DoorStatus.BACK_OPENED;
-            //}else if (backMsg.Contains(ArduinoMessage.RP_BACK_CLOSED))
-            //{
-            //    backDoorStatus = DoorStatus.BACK_CLOSED;
-            //}
-        }
-
-
-
-        private void timerSession_Tick(object sender, EventArgs e)
+        private void timerSession_Tick(object sender, EventArgs e) 
         {
             sesionTime -= 1;
             lbsession.Text = "SESSION TIMEOUT: " + this.sesionTime;

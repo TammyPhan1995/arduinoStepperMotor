@@ -17,11 +17,21 @@ namespace DropBoxUI
         public BookReturnItem(BookReturnModel book)
         {
             InitializeComponent();
-            String fullTitle = book.subtitle == "" ? book.title : book.title + ": " + book.subtitle;
-            lbTitle.Text = fullTitle.Length <= 50 ? fullTitle : fullTitle.Substring(0, 47) + "...";
+            String fullTitle = book.subtitle == null ? book.title : book.title + ": " + book.subtitle;
+            lbTitle.Text = fullTitle.Length <= UIMessage.MAX_STRING_LENGTH ?
+                fullTitle : fullTitle.Substring(0, UIMessage.MAX_STRING_LENGTH - 3) + "...";
             lbEdition.Text = "Edition: " + book.edition;
-            lbAuthors.Text = "Author(s): " + (book.authors.Length <= 50 ? book.authors : book.authors.Substring(0, 47) + "...");
-            picBook.Load(book.img);
+            lbAuthors.Text = "Author(s): " +
+                (book.authors.Length <= UIMessage.MAX_STRING_LENGTH ? book.authors : book.authors.Substring(0, UIMessage.MAX_STRING_LENGTH - 3) + "...");
+
+            try
+            {
+                picBook.Load(book.img);
+            }
+            catch (Exception)
+            {
+                picBook.Image = Properties.Resources._130304;
+            }
             lbGroup.Text = "Group: " + book.group;
             lbOverdueDay.Text = "Overdue day(s): " + book.overdueDay;
             lbFine.Text = "Fine: " + book.fine + " " + Constant.CURRENCY;

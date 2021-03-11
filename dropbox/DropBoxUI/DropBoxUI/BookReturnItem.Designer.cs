@@ -29,19 +29,19 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.lbFine = new System.Windows.Forms.Label();
+            this.lbOverdueDay = new System.Windows.Forms.Label();
             this.lbBorrower = new System.Windows.Forms.Label();
+            this.lbReturnedAt = new System.Windows.Forms.Label();
             this.lbGroup = new System.Windows.Forms.Label();
             this.lbAuthors = new System.Windows.Forms.Label();
             this.lbEdition = new System.Windows.Forms.Label();
             this.lbTitle = new System.Windows.Forms.Label();
             this.picBook = new System.Windows.Forms.PictureBox();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.lbFine = new System.Windows.Forms.Label();
-            this.lbOverdueDay = new System.Windows.Forms.Label();
-            this.lbReturnedAt = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picBook)).BeginInit();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picBook)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -58,6 +58,38 @@
             this.panel1.Size = new System.Drawing.Size(1590, 170);
             this.panel1.TabIndex = 1;
             // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.lbFine);
+            this.panel2.Controls.Add(this.lbOverdueDay);
+            this.panel2.Controls.Add(this.lbBorrower);
+            this.panel2.Controls.Add(this.lbReturnedAt);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel2.Location = new System.Drawing.Point(855, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(735, 170);
+            this.panel2.TabIndex = 10;
+            // 
+            // lbFine
+            // 
+            this.lbFine.AutoSize = true;
+            this.lbFine.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.lbFine.Location = new System.Drawing.Point(12, 77);
+            this.lbFine.Name = "lbFine";
+            this.lbFine.Size = new System.Drawing.Size(136, 24);
+            this.lbFine.TabIndex = 2;
+            this.lbFine.Text = "Fine: 2000 VND";
+            // 
+            // lbOverdueDay
+            // 
+            this.lbOverdueDay.AutoSize = true;
+            this.lbOverdueDay.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.lbOverdueDay.Location = new System.Drawing.Point(12, 44);
+            this.lbOverdueDay.Name = "lbOverdueDay";
+            this.lbOverdueDay.Size = new System.Drawing.Size(157, 24);
+            this.lbOverdueDay.TabIndex = 1;
+            this.lbOverdueDay.Text = "Overdue Day(s): 5";
+            // 
             // lbBorrower
             // 
             this.lbBorrower.AutoSize = true;
@@ -67,6 +99,16 @@
             this.lbBorrower.Size = new System.Drawing.Size(138, 24);
             this.lbBorrower.TabIndex = 9;
             this.lbBorrower.Text = "Borrower: tram";
+            // 
+            // lbReturnedAt
+            // 
+            this.lbReturnedAt.AutoSize = true;
+            this.lbReturnedAt.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.lbReturnedAt.Location = new System.Drawing.Point(12, 109);
+            this.lbReturnedAt.Name = "lbReturnedAt";
+            this.lbReturnedAt.Size = new System.Drawing.Size(263, 24);
+            this.lbReturnedAt.TabIndex = 0;
+            this.lbReturnedAt.Text = "Return At: 2021/0202 00:00:00";
             // 
             // lbGroup
             // 
@@ -110,54 +152,13 @@
             // 
             // picBook
             // 
+            this.picBook.Image = global::DropBoxUI.Properties.Resources._130304;
             this.picBook.Location = new System.Drawing.Point(15, 5);
             this.picBook.Name = "picBook";
             this.picBook.Size = new System.Drawing.Size(120, 160);
             this.picBook.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picBook.TabIndex = 1;
             this.picBook.TabStop = false;
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.lbFine);
-            this.panel2.Controls.Add(this.lbOverdueDay);
-            this.panel2.Controls.Add(this.lbBorrower);
-            this.panel2.Controls.Add(this.lbReturnedAt);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel2.Location = new System.Drawing.Point(855, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(735, 170);
-            this.panel2.TabIndex = 10;
-            // 
-            // lbFine
-            // 
-            this.lbFine.AutoSize = true;
-            this.lbFine.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.lbFine.Location = new System.Drawing.Point(12, 77);
-            this.lbFine.Name = "lbFine";
-            this.lbFine.Size = new System.Drawing.Size(136, 24);
-            this.lbFine.TabIndex = 2;
-            this.lbFine.Text = "Fine: 2000 VND";
-            // 
-            // lbOverdueDay
-            // 
-            this.lbOverdueDay.AutoSize = true;
-            this.lbOverdueDay.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.lbOverdueDay.Location = new System.Drawing.Point(12, 44);
-            this.lbOverdueDay.Name = "lbOverdueDay";
-            this.lbOverdueDay.Size = new System.Drawing.Size(157, 24);
-            this.lbOverdueDay.TabIndex = 1;
-            this.lbOverdueDay.Text = "Overdue Day(s): 5";
-            // 
-            // lbReturnedAt
-            // 
-            this.lbReturnedAt.AutoSize = true;
-            this.lbReturnedAt.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.lbReturnedAt.Location = new System.Drawing.Point(12, 109);
-            this.lbReturnedAt.Name = "lbReturnedAt";
-            this.lbReturnedAt.Size = new System.Drawing.Size(263, 24);
-            this.lbReturnedAt.TabIndex = 0;
-            this.lbReturnedAt.Text = "Return At: 2021/0202 00:00:00";
             // 
             // BookReturnItem
             // 
@@ -169,9 +170,9 @@
             this.Size = new System.Drawing.Size(1590, 170);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picBook)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picBook)).EndInit();
             this.ResumeLayout(false);
 
         }
