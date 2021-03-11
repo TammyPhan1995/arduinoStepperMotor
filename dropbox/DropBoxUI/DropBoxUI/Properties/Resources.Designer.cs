@@ -63,6 +63,16 @@ namespace DropBoxUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _130304 {
+            get {
+                object obj = ResourceManager.GetObject("130304", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap book_drop_station {
             get {
                 object obj = ResourceManager.GetObject("book_drop_station", resourceCulture);
